@@ -2,6 +2,7 @@ class Food {
     constructor(){
         var lastFed;
         var foodStock;
+        this.body = createSprite(720,220,70,70)
         this.image = loadImage("images/milk.png");
         this.foodStock = foodStock;
         this.lastFed = lastFed;
