@@ -15,12 +15,16 @@ function preload()
 
 function setup() {
   createCanvas(500, 500);
+  database = firebase.database();
   
   dog = createSprite(400,200,20,20);
   
   happyDog = createSprite(100,100,20,20);
  
   milk = new Food();
+
+  milk.updateTime(hour)
+ 
   
   
   
@@ -34,23 +38,24 @@ function draw() {
     var button2 = createButton('Add the Food');
     button1.position(700,100);
     button2.position(700,60);
-
+    console.log(hour);
+  
  button1.mousePressed(function(){
-    deductFoodStock(foods);
-    updateTime(hour)
-    
-    
+   deduct = new Food();
+    deduct.deductFoodStock(foodStock);
     dog.scale = 0.2;
 
  })
        
    button2.mousePressed(function(){
-    updateFoodStock(foods);
+    var  updt= new Food();
+    updt.updateFoodStock(foodStock);
     happyDog.addImage(img1);
     happyDog.scale = 0.2;
  })
  
   drawSprites();
+  
   
   dog.addImage(img2)
   dog.scale=0.2;
@@ -59,8 +64,9 @@ function draw() {
   textSize(15);
   fill('red')
   stroke(4)
-  text("Last Fed :" + lastfed,80,40);
+  text("Last Fed :" + time,80,40);
   //add styles here
+  
 
 }
 
