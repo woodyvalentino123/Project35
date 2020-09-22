@@ -1,7 +1,7 @@
 //Create variables here
 var doghungry, happyDog,database,foods,foodStock;
 var img1,img2;
-var lastfed,milk;
+var lastFed,milk;
 var time;
 var button1,button2;
 var happyD,hungryD;
@@ -17,7 +17,7 @@ function preload()
 
 function setup() {
   createCanvas(500, 500);
-  happyDog = createSprite(100,100,20,20); 
+  happyDog = createSprite(400,200,20,20); 
   doghungry = createSprite(400,200,20,20);
   doghungry.addImage(hungryD);
   doghungry.scale=0.2;
@@ -43,7 +43,7 @@ function setup() {
 function draw() {  
   background(46,139,87);
   foodobj.display();
-
+ 
 
   feedTime = database.ref("FeedTime");
   feedTime.on("value",function(data){
@@ -74,14 +74,7 @@ function showerror(){
 
 }
 
-  async function hour(){
-  var response =  await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
-    var responseJSON = await response.json();
-
-    var datetime = responseJSON.datetime;
-     time = datetime.slice(11,13);
-     console.log(time);
-  }
+  
 
 function readStock(data){
   foodS= data.val();
@@ -89,11 +82,14 @@ function readStock(data){
 
 }
 function feedDog(){
-  dog.addImage(happyD);
+  doghungry.addImage(null)
+  happyDog.addImage(happyD);
+  happyDog.scale = 0.2;
   foodobj.updateFoodStock(foodobj.getFoodStock()-1);
   database.ref("/").update({
-  Food:foodobj.getFoodStock(),
-  FeedTime:hour(time)
+  Food:foodobj.deductFoodStock(),
+  FeedTime:hour()
+  
 })
 }
 
