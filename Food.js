@@ -3,8 +3,10 @@ class Food {
         
         this.body = createSprite(720,220,70,70)
         this.image = loadImage("images/milk.png");
+       
         this.foodStock = 0;
         this.lastFed ;
+        
     }
    
        
@@ -12,11 +14,13 @@ class Food {
       this.lastFed=lastFed;   
        }
     
-    updateFoodStock(foodStock){
-    this.foodStock = foodStock;
+    updateFoodStock(foodS){
+    console.log(foodS);    
+    this.foodStock = foodS;
+    console.log(this.foodS);
     
   }
-
+   
     
     deductFoodStock(){
         if(this.foodStock>0){
@@ -30,16 +34,19 @@ class Food {
     
      
     display(){
-        var x =80,y=100;
+        
+        var x =50,y=100;
         imageMode(CENTER);
         image(this.image,720,220,70,70);
+        
         if(this.foodStock!==0){
             for(var i =0;i<this.foodStock;i++){
                 if(i%10===0){
-                    x = 80;
+                    x = 50;
                     y = y+50;
                 }
-                image(this.image,x,y,50);
+                image(this.image,x,y,50,40);
+                
                 x=x+30;
             }
         }
