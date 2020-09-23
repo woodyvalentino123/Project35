@@ -15,9 +15,8 @@ class Food {
        }
     
     updateFoodStock(foodS){
-    console.log(foodS);    
+        
     this.foodStock = foodS;
-    console.log(this.foodS);
     
   }
    

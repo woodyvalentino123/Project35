@@ -26,7 +26,12 @@ function setup() {
   database = firebase.database();
   getFoodStock = database.ref('Food');
   getFoodStock.on("value",readStock,showerror);
-   
+  var feedTime = database.ref('FeedTime');
+  feedTime.on("value",function (data){
+   lastFed = data.val();
+   console.log(lastFed);
+  })
+  
   foodobj = new Food();
 
   button1 = createButton('Feed the Dog');
@@ -45,11 +50,6 @@ function draw() {
   background(46,139,87);
   foodobj.display();
  
-
-  var feedTime = database.ref('FeedTime');
-  feedTime.on("value",timeFeed,showerror)
-   
-   
   
 
   
@@ -91,7 +91,7 @@ function feedDog(){
   database.ref("/").update({
   Food:foodobj.deductFoodStock(),
   FeedTime:hour(),
-  
+ 
   
 })
 }
@@ -103,10 +103,4 @@ function addFoods(){
     Food:foodS
   })
 }
- function timeFeed(data){
-   lastFed = data.val();
-   foodobj.getFedTime(lastFed);
-   console.log(lastFed)
-  
-
- }
+ 
